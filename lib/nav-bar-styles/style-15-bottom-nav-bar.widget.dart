@@ -35,51 +35,38 @@ class BottomNavStyle15 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Expanded(
-                        child: IconTheme(
-                          data: IconThemeData(
-                              size: item.iconSize,
-                              color: isSelected
-                                  ? (item.activeColorSecondary == null
-                                      ? item.activeColorPrimary
-                                      : item.activeColorSecondary)
-                                  : item.inactiveColorPrimary == null
-                                      ? item.activeColorPrimary
-                                      : item.inactiveColorPrimary),
-                          child: isSelected
-                              ? item.icon
-                              : item.inactiveIcon ?? item.icon,
-                        ),
+                      IconTheme(
+                        data: IconThemeData(
+                            size: item.iconSize,
+                            color: isSelected
+                                ? (item.activeColorSecondary == null
+                                    ? item.activeColorPrimary
+                                    : item.activeColorSecondary)
+                                : item.inactiveColorPrimary == null
+                                    ? item.activeColorPrimary
+                                    : item.inactiveColorPrimary),
+                        child: isSelected
+                            ? item.icon
+                            : item.inactiveIcon ?? item.icon,
                       ),
-                      item.title == null
-                          ? SizedBox.shrink()
-                          : Padding(
-                              padding: const EdgeInsets.only(top: 15.0),
-                              child: Material(
-                                type: MaterialType.transparency,
-                                child: FittedBox(
-                                    child: Text(
-                                  item.title!,
-                                  style: item.textStyle != null
-                                      ? (item.textStyle!.apply(
-                                          color: isSelected
-                                              ? (item.activeColorSecondary ==
-                                                      null
-                                                  ? item.activeColorPrimary
-                                                  : item.activeColorSecondary)
-                                              : item.inactiveColorPrimary))
-                                      : TextStyle(
-                                          color: isSelected
-                                              ? (item.activeColorSecondary ==
-                                                      null
-                                                  ? item.activeColorPrimary
-                                                  : item.activeColorSecondary)
-                                              : item.inactiveColorPrimary,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 12.0),
-                                )),
-                              ),
-                            )
+                      Text(
+                        item.title!,
+                        style: item.textStyle != null
+                            ? (item.textStyle!.apply(
+                                color: isSelected
+                                    ? (item.activeColorSecondary == null
+                                        ? item.activeColorPrimary
+                                        : item.activeColorSecondary)
+                                    : item.inactiveColorPrimary))
+                            : TextStyle(
+                                color: isSelected
+                                    ? (item.activeColorSecondary == null
+                                        ? item.activeColorPrimary
+                                        : item.activeColorSecondary)
+                                    : item.inactiveColorPrimary,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12.0),
+                      )
                     ],
                   )
                 ],
