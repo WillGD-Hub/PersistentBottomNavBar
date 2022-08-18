@@ -11,7 +11,7 @@ class BottomNavStyle15 extends StatelessWidget {
   });
 
   Widget _buildItem(BuildContext context, PersistentBottomNavBarItem item,
-      bool isSelected, double? height) {
+      bool isSelected, double? height, int? index, int? itemLength) {
     return this.navBarEssentials!.navBarHeight == 0
         ? SizedBox.shrink()
         : Container(
@@ -31,43 +31,49 @@ class BottomNavStyle15 extends StatelessWidget {
                 physics: NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      IconTheme(
-                        data: IconThemeData(
-                            size: item.iconSize,
-                            color: isSelected
-                                ? (item.activeColorSecondary == null
-                                    ? item.activeColorPrimary
-                                    : item.activeColorSecondary)
-                                : item.inactiveColorPrimary == null
-                                    ? item.activeColorPrimary
-                                    : item.inactiveColorPrimary),
-                        child: isSelected
-                            ? item.icon
-                            : item.inactiveIcon ?? item.icon,
-                      ),
-                      Text(
-                        item.title!,
-                        style: item.textStyle != null
-                            ? (item.textStyle!.apply(
-                                color: isSelected
-                                    ? (item.activeColorSecondary == null
-                                        ? item.activeColorPrimary
-                                        : item.activeColorSecondary)
-                                    : item.inactiveColorPrimary))
-                            : TextStyle(
-                                color: isSelected
-                                    ? (item.activeColorSecondary == null
-                                        ? item.activeColorPrimary
-                                        : item.activeColorSecondary)
-                                    : item.inactiveColorPrimary,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12.0),
-                      )
-                    ],
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: index == 0 ? 10 : 0,
+                      right: index == itemLength! - 1 ? 10 : 0,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        IconTheme(
+                          data: IconThemeData(
+                              size: item.iconSize,
+                              color: isSelected
+                                  ? (item.activeColorSecondary == null
+                                      ? item.activeColorPrimary
+                                      : item.activeColorSecondary)
+                                  : item.inactiveColorPrimary == null
+                                      ? item.activeColorPrimary
+                                      : item.inactiveColorPrimary),
+                          child: isSelected
+                              ? item.icon
+                              : item.inactiveIcon ?? item.icon,
+                        ),
+                        Text(
+                          item.title!,
+                          style: item.textStyle != null
+                              ? (item.textStyle!.apply(
+                                  color: isSelected
+                                      ? (item.activeColorSecondary == null
+                                          ? item.activeColorPrimary
+                                          : item.activeColorSecondary)
+                                      : item.inactiveColorPrimary))
+                              : TextStyle(
+                                  color: isSelected
+                                      ? (item.activeColorSecondary == null
+                                          ? item.activeColorPrimary
+                                          : item.activeColorSecondary)
+                                      : item.inactiveColorPrimary,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12.0),
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -204,7 +210,10 @@ class BottomNavStyle15 extends StatelessWidget {
                               context,
                               item,
                               this.navBarEssentials!.selectedIndex == index,
-                              this.navBarEssentials!.navBarHeight),
+                              this.navBarEssentials!.navBarHeight,
+                              index,
+                              this.navBarEssentials!.items!.length,
+                            ),
                     ),
                   );
                 }).toList(),
